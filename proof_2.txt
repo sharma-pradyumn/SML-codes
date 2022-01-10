@@ -1,0 +1,80 @@
+                                    PRADYUMN SHARMA - 2018UCS0061
+
+
+
+                                    PROOF OF CORRECTNESS OF insertSort
+
+i)First ,we shall prove that the function insert (R,array,x) inserts the element x in an already sorted array,in its sorted position as given by the relation R.
+We shall do this by using strong induction on the length of array.
+
+Let n be the length of array.
+
+Base case - if n=0 then insert returns [x] .Thus , it is trivally true.
+Else,
+Let the following statement be true : 
+P(n-1)= For all sorted arrays of length <n-1,the insert function,for all values of x, inserts it such that the array remains sorted wrt relation R.
+
+TP: P(n) holds true
+
+Let the element to be inserted in the array be y and 'head' denote the first element of the array.
+Then, there are two cases   
+
+1. R(y,head) is true -  In this case,as the array was previously sorted, thus R(head,t)=true for all element != head.
+Thus, using transitivity of R, we can say that R(y,t) holds for all elements of the array.
+Therefore, the new array y::head::tail will also be sorted.
+
+2. R(y,head) is false - Here, we shall call the insert function with parameters R,tail,y . Therefore,as the length
+of the array is n-1, using P(n-1), we can say that the new array returned will also be sorted.Also,as R(y,head) is false , therefore 
+R(head,y) will be true. As a result, if head is added in the front of the array, the array will remain sorted.
+
+
+ii) Now, we shall prove the correctness of the insertSort function. We shall use strong induction on the length of the array.
+
+Let n be the length of the array.
+
+For n=1, insertSort returns an array with one element, which is trivally sorted.
+
+P(n-1): We assume that for all arrays of length<=n-1, the insertSort program returns an array which is sorted wrt the relation R.
+
+TP: P(n) holds.
+
+Claim : 'rest' defiend as insertSort(R,t) , where 't' denotes the array with the head element removed,
+is equal to the sorted array with head removed.
+
+Proof: As t is an array of length n-1, thus using P(n-1), we can say that t is equal to the sorted array with head removed.
+
+Now,using the correctness of the insert function and the above claim , we can say the expression
+insert(R,rest,head) will return an array sorted wrt the relation R as head will be inserted in the sorted array 't' in the appropriate index.
+
+                                    PROOF OF CORRECTNESS OF insertSort_tr
+
+
+i)We can see following property of the function insert_tr(R,accum,arr,x):
+1. The function will recursively call itself,removing the head element of the array arr,until 
+for all appended elements t in accum, R(x,t) is false and for all elements y in arr, R(x,y) is true.It follows from the recursive defination of the function.
+
+2. If the array arr was originally sorted and accum was empty, then the returned arr will sorted and will contain x.
+
+Property 2 can be proven as :For all elements t in accum, R(x,t) is false and for all elements y in arr, R(x,y) is true.Therefore
+accum@(x::h::t) will also be sorted.
+  
+Thus, we see that calling insert_tr(R,[],arr,x) will return insert x in arr such that the returned array is sorted if arr was sorted.
+
+ii)We shall prove the correctness of insertSort_tr.
+It is equivalent to prove that insertSort_acc(R,[],arr) returns a sorted array if a.
+
+Now, for insertSort_acc(R,acc,arr) we shall prove the following
+i)acc is a sorted array.
+ii)insertSort_acc will recursively call itself until arr is empty and all its elements are added are to acc.
+
+PROOF: for i)We shall do this by using strong induction on the length of acc.
+            There are two cases.
+            1)arr is empty- Here the function will return acc and the property will hold.
+            2)arr is not empty- Let h be the head element of arr.Then,using strong induction,acc is also currently sorted.
+            Now, using the correctness of the insert_tr function, we see that the returned acc will also be sorted.
+
+            ii) It follows from the recursive defination of the function.
+
+Thus, using the above properties, and constructing an argument similar to the correctness of the recursive insertSort, we can prove the correctness of the tail recursive function.
+
+

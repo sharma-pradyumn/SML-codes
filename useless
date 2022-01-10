@@ -1,0 +1,36 @@
+
+2. The elements in accum and arr are sorted.
+3. For all elements t in accum, R(x,t)=false
+
+We shall do this by using strong induction on the length of array arr.
+For n=0, accum is also empty, thus all properties hold trivially true. 
+
+Let the above properties hold for all array of length<n.
+TP:The above properties hold for all array of length=n.
+
+Let h be the head of arr.
+There are two cases.
+
+    1.R(x,h) is true - As, arr is sorted,using transitivity of R, we can say that R(x,t) holds for all t elements of arr.
+    Thus, no new elements will be added to accum, and property(2) will hold. Also the function will return an array given by adding x in front of head, and then appending it to accum.Also, as accum and arr are sorted,
+    thus the new array will be sorted.
+    
+    2.R(x,h) is false-We can see by the defination of insert_acc, that in this case, h will be appended to accum and the function will recursively call itself 
+    for the rest of the array.
+
+
+
+i)First,we shall prove that the function insert_acc(R,accum,arr,x) inserts the element x in an already sorted array arr,in its sorted position as given by the relation R.
+We shall do this by using strong induction on the length of array arr. 
+
+claim: The function insert_acc will recursively call itself,removing the head element of the array arr,until accum contains all elements i of the array arr in a such that R(x,i)=false and are sorted.
+ Proof: There are two cases.
+
+    1.R(x,h) is true - As, arr is sorted,using transitivity of R, we can say that R(x,t) holds for all t elements of arr.
+    Thus, no new elements will be added to accum and the function will return an array given by adding x in front of head, and then appending it to accum.Also, as accum and arr are sorted,
+    thus the new array will be sorted.
+    
+    2.R(x,h) is false-We can see by the defination of insert_acc, that in this case, h will be appended to accum and the function will recursively call itself 
+    for the rest of the array.
+
+Thus, by the insert_acc function, we can partition arr into two 
